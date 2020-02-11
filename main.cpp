@@ -7,7 +7,7 @@
 	and/or legitimate user error. 
 	//Try and Catch blocks are used in error checking
 	Teacher: Dr. Tyson McMillan, Ph.D.  
-  STUDENT (McMillanite):
+  STUDENT (Stephen Hawkins):
 */
 #include <cstdlib>  // Provides EXIT_SUCCESS
 #include <iostream>  // Provides cout, cerr, endl
@@ -17,92 +17,46 @@
 #include<sstream> //for string manipulation and comparison
 using namespace std;
 
+void doubleByValue(double);
+void doubleByRef(double&);
+
 int main()
 {
-   //***********Validating int data type******************/
-	int input = 0;
-	input = validateInt(input); //validate my integer by function call, save that value into input
-    cout << "You entered valid int: " << input << endl;
-    
-	/****************Extend code to Validate double (follow int pattern)**********/
-	double inputDouble = 0.0;
-  	inputDouble = validateDouble(inputDouble); //validate my double by function call, save that value into inputDouble
-    cout << "You entered valid double: " << inputDouble << endl;
+  //Pass by Value
+  cout << "Pass by VALUE numValue and aValue are different." << endl;
+  double numValue = 5;
+  cout << "\t numValue now (initial) = " << numValue << endl;
+  doubleByValue(numValue);
+  cout << "\t numValue now = " << numValue << endl;
+  doubleByValue(numValue);
+  cout << "\t numValue now = " << numValue << endl;
+  cout << "Note how numValue remains the same with each call of function\n";
+  cout << "Note the function generates a result that is different from numValue.\n";
+  cout << "Therefore, numValue and aValue are different variables (not linked) to each other \n";
 
-	/****************Extend code to Validate char (follow int pattern)**********/
-	char inputChar = '\0'; //{0}
-	inputChar = validateChar(inputChar); //validate my char by function call, save that value into inputChar
-    cout << "You entered valid char: " << inputChar << endl;
+  //Pass by Reference
+  cout << "\nPass by REFERENCE (&) numRef and &aRef are the same. " << endl;
+  double numRef = 5;
+  cout << "\t numRef now (initial) = " << numRef << endl;
+  doubleByRef(numRef);
+  cout << "\t numRef now = " << numRef << endl;
+  doubleByRef(numRef);
+  cout << "\t numRef now = " << numRef << endl;
+  cout << "Note how numRef's value changes with each call of function\n";
+  cout << "Note the function generates a result that is the same as numRef.\n";
+  cout << "Therefore, numRef and &aRef variables (are linked) to each other via memory location.\n";
 
-	/****************Extend code to Validate string (follow int pattern, if possible)**********/
-	string inputString = (""); 
-	inputString = validateString(inputString); //validate my string by function call, save that value into inputString
-    cout << "You entered string: " << inputString << endl;
-
-	/****************Extend code to Validate if truly an int and greater than 77 **********/
-	int input2 = 0;
-	
-	do
-	{
-		cout << "Enter an integer greater than 77." << endl;  
-		input2 = validateInt(input2); //validate my integer by function call, save that value into input
-		
-		if(input2 < 77)
-		{
-			cout << "\nInvalid input: (" << input2 <<") number must be greater than 77." << endl;
-		}
-	}
-	while(input2 < 77); //loop until input2 is greather than 77
-
-    cout << "You entered valid int: " << input2 << endl;
-
-	/****************Extend code to Validate if truly an double and greater than 0.00 **********/
-	double inputDouble2 = 0.0;
-	
-	do
-	{
-		cout << "Enter an number greater than 0."<< endl; 
-		inputDouble2 = validateDouble(inputDouble2); //validate my integer by function call, save that value into input
-		
-		if(inputDouble2 < 0)
-		{
-			cout << "\nInvalid input: (" << inputDouble2 <<") number must be greater than 0." << endl;
-		}
-	}
-	while(inputDouble2 < 0); //loop until inputDouble2 is greather than 0
-
-    cout << "You entered valid double: " << inputDouble2<< endl;
-    //A program to output grade values
-   //based upon numberical input of the user yourName: Teacher: Dr_T 8-28-2019
-   double grade = 0.0; 
-   do
-   { // begin do 
-      cout << "\nPlease enter a numerical grade (-1 to exit): ";
-      grade = validateDouble(grade); //accept grade and validate the data type
-      //if condition test
-      if(grade >= 90.0)
-      {
-        cout << "\nThat's an A!" << endl; 
-      }
-      else if(grade >= 80.0 && grade <= 89.9)
-      {
-        cout << "\nThat's a B!" << endl; 
-      }
-      else if(grade >= 70.0 && grade <= 79.9)
-      {
-        cout << "\nThat's a C!" << endl; 
-      }
-      else if(grade >= 60.0 && grade <= 69.9)
-      {
-        cout << "\nYikes. That's a D!" << endl; 
-      }
-      else if(grade < 60.0)
-      {
-        cout << "\nSee you next semester: F" << endl; 
-      }
-      else {cout << "\nInvalid input." << endl;}
-
-   }while(grade != -1); //end do 
-   
     return 0;
+}
+void doubleByValue(double aValue)
+{
+  aValue *= 2;
+  cout << "\t aValue now = " << aValue <<endl;
+
+}
+
+void doubleByRef(double &aRef)
+{
+  aRef *= 2;
+  cout << "\t aRef now = " << aRef << endl;
 }
